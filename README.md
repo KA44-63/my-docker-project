@@ -1,21 +1,26 @@
-﻿# OCI Docker HTML Generator
+﻿# OCI Docker HTML Генераторы
 
-Проект сгенерированного HTML-сайта, запакованного в OCI-совместимый Docker-образ на базе Nginx.
+Жоба Python арқылы HTML парақшасын генерациялап, оны Nginx базисіндегі OCI-үйлесімді Docker-образға жинақтайды.
 
-## Структура проекта
-- generate.py — Python-скрипт, генерирующий index.html.
-- Dockerfile — Multi-stage сборка (Python для генерации + Nginx Alpine для раздачи HTML).
+## Жоба құрылымы
+- generate.py — index.html файлын генерациялайтын Python скрипті.
+- Dockerfile — Multi-stage жинақтау (Python арқылы HTML жасау + Nginx Alpine арқылы тарату).
+- .github/workflows/build.yml — GitHub Actions арқылы Docker-образды автоматты түрде жинақтау және GHCR-ге жүктеу (CI/CD).
 
-## Запуск проекта
+## Жобаны іске қосу
 
-### 1. Сборка Docker-образа
-\\\ash
+### 1. Docker-образды локальды түрде жинақтау
 docker build -t my-html-app:v1 .
-\\\
 
-### 2. Запуск контейнера
-\\\ash
+### 2. Контейнерді іске қосу
 docker run -d -p 8080:80 --name my-container my-html-app:v1
-\\\
 
-После запуска откройте [http://localhost:8080](http://localhost:8080) в браузере.
+Браузерде ашу: http://localhost:8080
+
+---
+
+## GitHub Container Registry (GHCR) арқылы дайын образды жүктеу
+
+Сондай-ақ, GitHub Actions автоматты түрде жинақтаған дайын OCI-образды бір командамен іске қосуға болады:
+
+docker run -d -p 8080:80 ghcr.io/ka44-63/my-docker-project:latest
